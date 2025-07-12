@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Square, Inc.
+ * Copyright (C) 2025 Square, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,16 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package okio
+package okio.fakefilesystem
 
 import kotlin.time.Clock
 
-class NativeSystemFileSystemTest : AbstractFileSystemTest(
-  clock = Clock.System,
-  fileSystem = FileSystem.SYSTEM,
-  windowsLimitations = Path.DIRECTORY_SEPARATOR == "\\",
-  allowClobberingEmptyDirectories = Path.DIRECTORY_SEPARATOR == "\\",
-  allowAtomicMoveFromFileToDirectory = false,
-  temporaryDirectory = FileSystem.SYSTEM_TEMPORARY_DIRECTORY,
-  closeBehavior = CloseBehavior.DoesNothing,
-)
+internal actual val defaultClockNowMillis: () -> Long = { Clock.System.now().toEpochMilliseconds() }
